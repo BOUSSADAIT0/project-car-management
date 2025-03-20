@@ -11,7 +11,7 @@ const VehicleCard = ({ vehicle }) => {
       <Link to={`/vehicle/${vehicle._id}`}>
         <Card.Img 
           src={vehicle.images && vehicle.images.length > 0 
-            ? `${baseImageUrl}/${vehicle.images[0]}`
+            ? `${baseImageUrl}/uploads/${vehicle.images[0]}` 
             : 'https://via.placeholder.com/300x200?text=Pas+d%27image'}
           variant="top" 
           className="vehicle-img"

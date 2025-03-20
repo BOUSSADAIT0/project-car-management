@@ -32,72 +32,48 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             
             {/* Protected Routes */}
-            <Route 
-              path="/profile" 
-              element={
-                <ProtectedRoute>
-                  <ProfilePage />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/my-requests" 
-              element={
-                <ProtectedRoute>
-                  <MyRequestsPage />
-                </ProtectedRoute>
-              } 
-            />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/my-requests" element={
+              <ProtectedRoute>
+                <MyRequestsPage />
+              </ProtectedRoute>
+            } />
             
             {/* Admin Routes */}
-            <Route 
-              path="/admin/vehicles" 
-              element={
-                <AdminRoute>
-                  <VehicleListPage />
-                </AdminRoute>
-              } 
-            />
-            <Route 
-              path="/admin/vehicles/:pageNumber" 
-              element={
-                <AdminRoute>
-                  <VehicleListPage />
-                </AdminRoute>
-              } 
-            />
-            <Route 
-              path="/admin/vehicle/:id/edit" 
-              element={
-                <AdminRoute>
-                  <VehicleEditPage />
-                </AdminRoute>
-              } 
-            />
-            <Route 
-              path="/admin/vehicle/new" 
-              element={
-                <AdminRoute>
-                  <VehicleEditPage />
-                </AdminRoute>
-              } 
-            />
-            <Route 
-              path="/admin/requests" 
-              element={
-                <AdminRoute>
-                  <RequestListPage />
-                </AdminRoute>
-              } 
-            />
-            <Route 
-              path="/admin/users" 
-              element={
-                <AdminRoute>
-                  <UserListPage />
-                </AdminRoute>
-              } 
-            />
+            <Route path="/admin/vehicles" element={
+              <AdminRoute>
+                <VehicleListPage />
+              </AdminRoute>
+            } />
+            <Route path="/admin/vehicles/:pageNumber" element={
+              <AdminRoute>
+                <VehicleListPage />
+              </AdminRoute>
+            } />
+            <Route path="/admin/vehicle/:id/edit" element={
+              <AdminRoute>
+                <VehicleEditPage />
+              </AdminRoute>
+            } />
+            <Route path="/admin/vehicle/new" element={
+              <AdminRoute>
+                <VehicleEditPage />
+              </AdminRoute>
+            } />
+            <Route path="/admin/requests" element={
+              <AdminRoute>
+                <RequestListPage />
+              </AdminRoute>
+            } />
+            <Route path="/admin/users" element={
+              <AdminRoute>
+                <UserListPage />
+              </AdminRoute>
+            } />
           </Routes>
         </Container>
       </main>
