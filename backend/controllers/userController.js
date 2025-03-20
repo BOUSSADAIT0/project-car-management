@@ -163,11 +163,45 @@ const deleteUser = async (req, res) => {
   }
 };
 
+
+// Ajoutez cette nouvelle fonction au contrôleur utilisateur existant
+// backend/controllers/userController.js
+
+// Fonction à ajouter en bas du fichier userController.js, juste avant module.exports
+// @desc    Mettre à jour le statut admin d'un utilisateur
+// @route   PUT /api/users/:id/admin
+// @access  Private/Admin
+const updateUserAdminStatus = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+
+    // Mise à jour du statut admin
+    user.isAdmin = req.body.isAdmin;
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Modifiez l'objet d'export pour inclure la nouvelle fonction
 module.exports = {
   registerUser,
   loginUser,
   getUserProfile,
   updateUserProfile,
   getUsers,
-  deleteUser
+  deleteUser,
+  updateUserAdminStatus
 };
+

@@ -3,7 +3,7 @@ import { Row, Col, Image } from 'react-bootstrap';
 
 const ImageGallery = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState(0);
-  const baseImageUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  const baseImageUrl = 'http://localhost:5000';
 
   // Placeholder image if no images are available
   const placeholderImage = 'https://via.placeholder.com/600x400?text=Pas+d%27image';
@@ -23,7 +23,7 @@ const ImageGallery = ({ images }) => {
       <Row className="mb-3">
         <Col>
           <Image 
-            src={`${baseImageUrl}/uploads/${images[selectedImage]}`}
+            src={`${baseImageUrl}/uploads/${images[selectedImage].startsWith('car_images/') ? images[selectedImage] : `car_images/${images[selectedImage]}`}`}
             alt="Vehicle" 
             fluid 
             className="vehicle-detail-img"
@@ -36,7 +36,7 @@ const ImageGallery = ({ images }) => {
             {images.map((image, index) => (
               <Image
                 key={index}
-                src={`${baseImageUrl}/uploads/${image}`}
+                src={`${baseImageUrl}/uploads/${image.startsWith('car_images/') ? image : `car_images/${image}`}`}
                 alt={`Thumbnail ${index}`}
                 className={`thumbnail-img ${selectedImage === index ? 'active' : ''}`}
                 onClick={() => setSelectedImage(index)}

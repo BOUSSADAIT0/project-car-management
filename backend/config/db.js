@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const connectDB = async () => {
   try {
     // Utilisez explicitement l'adresse IPv4

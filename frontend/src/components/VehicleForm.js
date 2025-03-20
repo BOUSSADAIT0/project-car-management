@@ -25,7 +25,7 @@ const VehicleForm = ({ vehicle, onSubmit, buttonText = 'Enregistrer' }) => {
   const [keepImages, setKeepImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
   const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
-  const baseImageUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  const baseImageUrl = 'http://localhost:5000/uploads/';
 
   useEffect(() => {
     if (vehicle) {
@@ -358,7 +358,10 @@ const VehicleForm = ({ vehicle, onSubmit, buttonText = 'Enregistrer' }) => {
           <div className="image-preview">
             {keepImages.map((image, index) => (
               <div key={index} className="image-preview-item">
-                <img src={`${baseImageUrl}/uploads/${image}`} alt={`Existing ${index}`} />
+                <img 
+                  src={`${baseImageUrl}${image.startsWith('car_images/') ? image : `car_images/${image}`}`} 
+                  alt={`Existing ${index}`} 
+                />
                 <div className="remove-btn" onClick={() => removeKeepImage(index)}>
                   <FaTimes />
                 </div>

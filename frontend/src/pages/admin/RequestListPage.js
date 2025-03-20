@@ -169,7 +169,7 @@ const RequestListPage = () => {
                         <div className="d-flex align-items-center">
                           {request.vehicle && request.vehicle.images && request.vehicle.images.length > 0 ? (
                             <img
-                              src={`${baseImageUrl}/uploads/${request.vehicle.images[0]}`}
+                              src={`${baseImageUrl}/uploads/${request.vehicle.images[0].startsWith('car_images/') ? request.vehicle.images[0] : `car_images/${request.vehicle.images[0]}`}`}
                               alt={request.vehicle ? request.vehicle.make : ''}
                               className="me-2"
                             />

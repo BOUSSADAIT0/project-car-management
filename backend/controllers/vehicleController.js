@@ -113,6 +113,7 @@ const createVehicle = async (req, res) => {
     await uploadMiddleware(req, res);
 
     // Récupérer les chemins des images téléchargées
+    // MODIFICATION: Assurez-vous que tous les chemins commencent par 'car_images/'
     const imagePaths = req.files ? req.files.map(file => `car_images/${file.filename}`) : [];
 
     const {
@@ -177,6 +178,7 @@ const updateVehicle = async (req, res) => {
     await uploadMiddleware(req, res);
 
     // Récupérer les chemins des nouvelles images téléchargées
+    // MODIFICATION: Assurez-vous que tous les chemins commencent par 'car_images/'
     const newImagePaths = req.files ? req.files.map(file => `car_images/${file.filename}`) : [];
 
     const vehicle = await Vehicle.findById(req.params.id);

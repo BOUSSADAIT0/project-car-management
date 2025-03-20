@@ -16,9 +16,10 @@
       "mongoose": "^7.5.0",
       "multer": "^1.4.5-lts.1",
       "swagger-jsdoc": "^6.2.8",
-      "swagger-ui-express": "^5.0.0"
+      "swagger-ui-express": "^5.0.0",
+      "z-schema": "^5.0.0"
     },
     "devDependencies": {
-      "nodemon": "^3.0.1"
+      "nodemon": "^3.1.9"
     }
   }

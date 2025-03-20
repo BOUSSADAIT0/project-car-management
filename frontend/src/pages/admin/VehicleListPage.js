@@ -120,46 +120,54 @@ const VehicleListPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {vehicles.map((vehicle) => (
-                  <tr key={vehicle._id}>
-                    <td>{vehicle._id.substring(0, 8)}...</td>
-                    <td>
-                      {vehicle.images && vehicle.images.length > 0 ? (
-                        <img
-                          src={`${baseImageUrl}/uploads/${vehicle.images[0]}`}
-                          alt={vehicle.make}
-                        />
-                      ) : (
-                        <span>Aucune image</span>
-                      )}
-                    </td>
-                    <td>
-                      {vehicle.make} {vehicle.model}
-                    </td>
-                    <td>{vehicle.year}</td>
-                    <td>{vehicle.prix && `${vehicle.prix.toLocaleString()} €`}</td>
-                    <td>{getStatusBadge(vehicle.status)}</td>
-                    <td>
-                      <Badge bg={vehicle.disponible ? 'success' : 'danger'}>
-                        {vehicle.disponible ? 'Disponible' : 'Non disponible'}
-                      </Badge>
-                    </td>
-                    <td>
-                      <LinkContainer to={`/admin/vehicle/${vehicle._id}/edit`}>
-                        <Button variant="light" className="btn-sm me-2">
-                          <FaEdit />
-                        </Button>
-                      </LinkContainer>
-                      <Button
-                        variant="danger"
-                        className="btn-sm"
-                        onClick={() => deleteHandler(vehicle._id)}
-                      >
-                        <FaTrash />
-                      </Button>
+                {vehicles.length === 0 ? (
+                  <tr>
+                    <td colSpan="8" className="text-center">
+                      Aucun véhicule trouvé
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  vehicles.map((vehicle) => (
+                    <tr key={vehicle._id}>
+                      <td>{vehicle._id.substring(0, 8)}...</td>
+                      <td>
+                        {vehicle.images && vehicle.images.length > 0 ? (
+                          <img
+                            src={`${baseImageUrl}/uploads/${vehicle.images[0].startsWith('car_images/') ? vehicle.images[0] : `car_images/${vehicle.images[0]}`}`}
+                            alt={vehicle.make}
+                          />
+                        ) : (
+                          <span>Aucune image</span>
+                        )}
+                      </td>
+                      <td>
+                        {vehicle.make} {vehicle.model}
+                      </td>
+                      <td>{vehicle.year}</td>
+                      <td>{vehicle.prix && `${vehicle.prix.toLocaleString()} €`}</td>
+                      <td>{getStatusBadge(vehicle.status)}</td>
+                      <td>
+                        <Badge bg={vehicle.disponible ? 'success' : 'danger'}>
+                          {vehicle.disponible ? 'Disponible' : 'Non disponible'}
+                        </Badge>
+                      </td>
+                      <td>
+                        <LinkContainer to={`/admin/vehicle/${vehicle._id}/edit`}>
+                          <Button variant="light" className="btn-sm me-2">
+                            <FaEdit />
+                          </Button>
+                        </LinkContainer>
+                        <Button
+                          variant="danger"
+                          className="btn-sm"
+                          onClick={() => deleteHandler(vehicle._id)}
+                        >
+                          <FaTrash />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </Table>
           </Card.Body>

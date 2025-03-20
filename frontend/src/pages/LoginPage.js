@@ -1,4 +1,3 @@
-// LoginPage.js
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
@@ -6,14 +5,29 @@ import { AuthContext } from '../context';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { FaSignInAlt } from 'react-icons/fa';
+import { FaSignInAlt, FaUserShield } from 'react-icons/fa';
+
+// Fonction pour mettre à jour le statut administrateur (temporaire)
+const setAsAdmin = () => {
+  try {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo) return false;
+    
+    userInfo.isAdmin = true;
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du statut admin:', error);
+    return false;
+  }
+};
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   
-  const { login, loading, isAuthenticated } = useContext(AuthContext);
+  const { login, loading, isAuthenticated, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -39,6 +53,21 @@ const LoginPage = () => {
       }
     } catch (err) {
       setError('Une erreur est survenue. Veuillez réessayer.');
+    }
+  };
+
+  const handleSetAsAdmin = () => {
+    if (isAuthenticated) {
+      const success = setAsAdmin();
+      if (success) {
+        alert('Vous êtes maintenant administrateur. Veuillez vous reconnecter pour que les changements prennent effet.');
+        logout();
+        navigate('/login');
+      } else {
+        alert('Échec de la mise à jour du statut administrateur');
+      }
+    } else {
+      alert('Veuillez vous connecter d\'abord');
     }
   };
 
@@ -87,6 +116,18 @@ const LoginPage = () => {
           </Link>
         </Col>
       </Row>
+      
+      {/* Bouton temporaire pour définir l'utilisateur comme administrateur */}
+      <Button 
+        variant="outline-primary" 
+        className="w-100 mt-3"
+        onClick={handleSetAsAdmin}
+      >
+        <FaUserShield className="me-2" /> Définir comme administrateur (temporaire)
+      </Button>
+      <p className="text-muted small text-center mt-2">
+        Ce bouton est temporaire et permet de donner les droits d'administrateur à un utilisateur.
+      </p>
     </FormContainer>
   );
 };

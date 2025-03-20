@@ -4,14 +4,14 @@ import { Card, Badge } from 'react-bootstrap';
 import { FaCar, FaGasPump, FaCogs } from 'react-icons/fa';
 
 const VehicleCard = ({ vehicle }) => {
-  const baseImageUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-  
+  // const baseImageUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  const baseImageUrl = "http://localhost:5000/uploads/" 
   return (
     <Card className="my-3 vehicle-card">
       <Link to={`/vehicle/${vehicle._id}`}>
         <Card.Img 
           src={vehicle.images && vehicle.images.length > 0 
-            ? `${baseImageUrl}/uploads/${vehicle.images[0]}` 
+            ? `${baseImageUrl}${vehicle.images[0].startsWith('car_images/') ? vehicle.images[0] : `car_images/${vehicle.images[0]}`}` 
             : 'https://via.placeholder.com/300x200?text=Pas+d%27image'}
           variant="top" 
           className="vehicle-img"
