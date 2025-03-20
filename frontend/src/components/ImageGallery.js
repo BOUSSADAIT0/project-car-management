@@ -23,7 +23,8 @@ const ImageGallery = ({ images }) => {
       <Row className="mb-3">
         <Col>
           <Image 
-            src={`${baseImageUrl}/uploads/${images[selectedImage]}`}
+            // Changez cette ligne en supprimant /uploads/
+            src={`${baseImageUrl}/${images[selectedImage]}`}
             alt="Vehicle" 
             fluid 
             className="vehicle-detail-img"
@@ -36,7 +37,8 @@ const ImageGallery = ({ images }) => {
             {images.map((image, index) => (
               <Image
                 key={index}
-                src={`${baseImageUrl}/uploads/${image}`}
+                // Changez également cette ligne
+                src={`${baseImageUrl}/${image}`}
                 alt={`Thumbnail ${index}`}
                 className={`thumbnail-img ${selectedImage === index ? 'active' : ''}`}
                 onClick={() => setSelectedImage(index)}
